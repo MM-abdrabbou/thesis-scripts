@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# This python script combines the alignment statistics of the 100 samples in one data frame
 
 #%% Import the modules
 
