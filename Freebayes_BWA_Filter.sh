@@ -28,23 +28,3 @@ vcffilter -f "TYPE = ins | TYPE = del" \
 vcffilter -f "TYPE = complex" \
     $IN_PATH/freebayes_BWA_ALL_VCF.vcf \
     > $PATH_OUT_VCF/freebayes_BWA_ALL_VCF_COMPLEX.vcf    
-
-
-# Filtering variant calls according some basic heuristics
-# QUAL >= 20 (probability of actual variant > 0.99)
-
-vcffilter -f " ( QUAL > 1 ) " \
-    $IN_PATH/ /freebayes_BWA_ALL_VCF_SNPs.vcf \
-    > $PATH_OUT_VCF/freebayes_BWA_ALL_VCF_SNPs_Qual.vcf
-
-vcffilter -g "DP > 61 " \
-    $IN_PATH/ //freebayes_BWA_ALL_VCF_SNPs_Qual.vcf\
-    > $PATH_OUT_VCF/freebayes_BWA_ALL_VCF_SNPs_Qual_DP.vcf
-
-#vcffilter -g "SAR > 0 " \
- #   $IN_PATH/
-  #  > $PATH_OUT_VCF
-
-#vcffilter -g "SAF > 0 " \
- #   $IN_PATH/ 
-  #  > $PATH_OUT_VCF
