@@ -14,8 +14,6 @@ mkdir -p $PATH_VCF_OUT
 PATH_STAT_OUT=/media/rna/INIA/benchmark/Variant_calling/gatk/bwa/stat
 mkdir -p $PATH_STAT_OUT
 
-# Calculating number of total input samples
-TOTAL_SAMPLES=$(ls -l $PATH_IN_BAMS | grep -c ^d)
 
 
 #create sequence dictionary as gatk needs a fasta dictionary for the reference
