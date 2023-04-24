@@ -4,6 +4,7 @@
 #                                                                           #
 # Octopus and gatk has a problem in individual sample naming                #   
 # so this script was used to change sample names before merging vcf files   #
+#                                                                           #
 #############################################################################
 
 
