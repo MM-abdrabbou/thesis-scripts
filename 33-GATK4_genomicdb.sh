@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+# This script uses genomic DBImport from GATK4 to merge GVCF files generated from BWA-mem BAM files
+
+
 #PATH_IN_VCF=/media/rna/INIA/benchmark/Variant_calling/gatk/bwa_gvcf_nnsamples
 PATH_OUT=/media/rna/INIA/benchmark/VCF_Filteration/Gatk4/bwa
 reference=/media/rna/INIA/benchmark/Variant_calling/gatk/Reference/DM_1-3_516_R44_potato_genome_assembly.v6.1.fa
@@ -10,16 +14,13 @@ cd /media/rna/INIA/benchmark/Variant_calling/gatk/bwa_gvcf_nnsamples
 #for f in *.vcf; do   bgzip "$f"; done
 #for f in *.gz ; do tabix -p vcf $f ; done
 #for entry in *.gz; do echo $entry; done
+
+# Attempts to use rtg tools, bcftools merge, GATK4 mergeVCFs and GATK4 combineGVCFs didn't work.
 #/home/rna/benchmark/rtg-tools/rtg-tools-3.12.1-32d4c2d2/rtg vcfmerge -I /media/rna/INIA/benchmark/Variant_calling/BCF_Tools/bwa-mem/files_names.txt -F -o $PATH_OUT/bcftools_bwa_rtg.vcf.gz
-
 #bcftools merge  -l /media/rna/INIA/benchmark/files_names.txt --force-samples -o $PATH_OUT/gatk4_bwa_bcfmerge.vcf.gz
-
-
 #/media/rna/INIA/benchmark/Variant_calling/gatk/gatk-4.2.5.0/gatk MergeVcfs -I /media/rna/INIA/benchmark/files_names.txt -O $PATH_OUT/gatk4_bwa_bcfmerge.vcf.gz
-
 #for sample in *vcf.gz ; do
 #/media/rna/INIA/benchmark/Variant_calling/gatk/gatk-4.2.5.0/gatk CombineGVCFs \
-
 #done
 
 #bcftools view -h P1-A01-001-AD.vcf.gz | grep TAG
@@ -128,7 +129,3 @@ cd /media/rna/INIA/benchmark/Variant_calling/gatk/bwa_gvcf_nnsamples
 -L /media/rna/INIA/benchmark/intervals.list \
 --genomicsdb-workspace-path $PATH_OUT
 
-#-L /media/rna/INIA/benchmark/intervals.list \
-
-#--genomicsdb-update-workspace-path $PATH_IN_VCF
-#-O $PATH_OUT/gatk4_bwa_All.g.vcf.gz 
