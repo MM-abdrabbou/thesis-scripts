@@ -13,10 +13,3 @@ mkdir -p $PATH_OUT_VCF
 
 bcftools view -v snps $IN_PATH/octopus_bowtie2_bcfmerge.vcf.gz > $PATH_OUT_VCF/octopus_bowtie2_bcfmerge_snps.vcf
 
-#vcffilter -g "SAR > 0 " \
- #   $IN_PATH/
-  #  > $PATH_OUT_VCF
-
-#vcffilter -g "SAF > 0 " \
- #   $IN_PATH/ 
-  #  > $PATH_OUT_VCF
