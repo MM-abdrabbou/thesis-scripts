@@ -1,6 +1,11 @@
 #!/bin/bash
+###################################################
+#                                                 #
+# Delete unncecessary files generated from bbduk  #
+#  then run fastqc                                #
+#                                                 #
+###################################################
 
-#delete unnecessary files 
 #cd /media/rna/INIA/benchmark/Data_Filtered_stat_1
 #find -type f -name '*_trimR.fastq.bz2*' -delete
 #find -type f -name '*_trimRL.fastq.bz2*' -delete
