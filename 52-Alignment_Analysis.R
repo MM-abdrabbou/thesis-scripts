@@ -1,3 +1,6 @@
+
+# This R script generates the mapping efficiency plot.
+
 #load required packages
 library(tidyverse)
 library(here)
