@@ -1,22 +1,21 @@
 #!/bin/bash
 
-#PATH_IN_VCF=/media/rna/INIA/benchmark/Variant_calling/gatk/bwa/VCF_samples_nnames
+# This script uses CombineGVCFs function from GATK4 to merge GVCF files from Bowtie2 output
+
+PATH_IN_VCF=/media/rna/INIA/benchmark/Variant_calling/gatk/bwa/VCF_samples_nnames
 PATH_OUT=/media/rna/INIA/benchmark/VCF_Filteration/Gatk4
 reference=/media/rna/INIA/benchmark/Variant_calling/gatk/Reference/DM_1-3_516_R44_potato_genome_assembly.v6.1.fa
 #mkdir -p $PATH_OUT
 
-
+#prepare files for merging
 cd /media/rna/INIA/benchmark/Variant_calling/gatk/bowtie2_gvcf_nnsamples
 #for f in *.vcf; do   bgzip "$f"; done
 #for f in *.gz ; do tabix -p vcf $f ; done
 #for entry in *.gz; do echo $entry; done
 #/home/rna/benchmark/rtg-tools/rtg-tools-3.12.1-32d4c2d2/rtg vcfmerge -I /media/rna/INIA/benchmark/Variant_calling/BCF_Tools/bwa-mem/files_names.txt -F -o $PATH_OUT/bcftools_bwa_rtg.vcf.gz
 
-#bcftools merge  -l /media/rna/INIA/benchmark/files_names.txt --force-samples -o $PATH_OUT/gatk4_bwa_bcfmerge.vcf.gz
 
-
-#/media/rna/INIA/benchmark/Variant_calling/gatk/gatk-4.2.5.0/gatk MergeVcfs -I /media/rna/INIA/benchmark/files_names.txt -O $PATH_OUT/gatk4_bwa_bcfmerge.vcf.gz
-
+#problem with the loop not compatible with Combine GVCF
 #for sample in *vcf.gz ; do
 /media/rna/INIA/benchmark/Variant_calling/gatk/gatk-4.2.5.0/gatk CombineGVCFs \
 -R $reference \
@@ -123,9 +122,4 @@ cd /media/rna/INIA/benchmark/Variant_calling/gatk/bowtie2_gvcf_nnsamples
 -O $PATH_OUT/gatk4_bowtie2_All.g.vcf.gz 
 #done
 
-#bcftools view -h P1-A01-001-AD.vcf.gz | grep TAG
-#/media/rna/INIA/benchmark/Variant_calling/gatk/gatk-4.2.5.0/gatk GenomicsDBImport \
-#-V P1-A02-009-AV.vcf.gz \
-#-V P1-A05-033-CO.vcf.gz \
-#-L chr1\
-#--genomicsdb-workspace-path $PATH_IN_VCF
+
