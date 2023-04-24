@@ -1,8 +1,11 @@
+#load required packages
 library(tidyverse)
 library(here)
 library(reshape2)
 library(ggforce)
-#read the two dataframes
+
+
+#read the two dataframes of BWA-mema and Bowtie2
 statFrame1 <- read.csv("/media/rna/INIA/benchmark/Alignment/BWA/alignFrame100_BWA.csv")
 names(statFrame1)[names(statFrame1) == "X1"] <- "sample"
 
@@ -87,6 +90,7 @@ mean(statFrame$nonprimary_alignments / statFrame$raw_total_sequences) * 100
 mean(statFrame2$supplementary_alignments / statFrame2$raw_total_sequences) * 100
 
 
+#Combining data from both aligners in a long format
 relFrame1$aligner <- 'BWA'
 relFrame2$aligner <- 'Bowtie2'
 
