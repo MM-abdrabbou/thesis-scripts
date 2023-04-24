@@ -1,5 +1,11 @@
 #!/bin/bash
 
+
+###################################################
+#                                                 #
+# Perform bbduk filteration on raw reads          #
+#                                                 #
+###################################################
 cd /media/rna/INIA/benchmark/Raw_Data
 
 ##bbduk version 38.86
