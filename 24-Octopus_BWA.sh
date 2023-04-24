@@ -1,10 +1,10 @@
 #!/bin/bash
 
-##############################################################################################################################################
-										
-#collect octopus script		      #
-
-##############################################################################################################################################
+#######################################################################
+#								      #	
+# Call variants from BAM files mapped by BWA-mem using  Octopus       #
+#                                                                     #
+#######################################################################
 
 PATH_IN_BAMS=/media/rna/INIA/benchmark/Alignment/BWA/BWA_BAM
 PATH_REF_FILE=/media/rna/INIA/benchmark/Alignment/BWA/Reference_BWA/DM_1-3_516_R44_potato_genome_assembly.v6.1.fa
@@ -24,7 +24,8 @@ for folder in ${PATH_IN_BAMS}/*; do
   /media/rna/INIA/benchmark/Variant_calling/gatk/gatk-4.2.5.0/gatk ValidateSamFile   -I $PATH_IN_BAMS/$sample/*_sorted*.bam -R $PATH_REF_FILE MODE= SUMMARY
     #fix the readgroup issue
   /media/rna/INIA/benchmark/Variant_calling/gatk/gatk-4.2.5.0/gatk AddOrReplaceReadGroups -I $PATH_IN_BAMS/$sample/*_sorted*.bam -O $PATH_VCF_OUT/$sample.bam -SORT_ORDER coordinate -RGID foo -RGLB bar -RGPL illumina -RGPU barcode  -RGSM Sample1 -CREATE_INDEX True
-  #sudo docker run dancooke/octopus \
+  
+  #variant calling
   /home/rna/Downloads/octopus/bin/octopus --reference $PATH_REF_FILE \
   --reads $PATH_VCF_OUT/$sample.bam \
   --organism-ploidy 4 \
@@ -37,7 +38,9 @@ for folder in ${PATH_IN_BAMS}/*; do
   oct_end=`date +%s`
   oct_time=$(($oct_end-oct_start))
   echo "octopus variant calling time in s ($sample):	$oct_time" >> $COMP
-done 
+done
+exit
+
 #--disable-denovo-variant-discovery \
 #--refcall \
 #--lagging-level OPTIMSITIC \
