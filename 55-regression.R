@@ -1,8 +1,8 @@
+#This script perfroms the regression analysis on computational times of aligners
+
+
 library('nortest')
 library('tidyverse')
-
-# assinment 11 in statistics, check linear quadratic and non linear regression
-#plot residulas, R2 value, 
 
 
 # check linear regression
