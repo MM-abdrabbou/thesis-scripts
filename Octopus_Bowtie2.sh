@@ -1,10 +1,11 @@
 #!/bin/bash
 
-##############################################################################################################################################
-										
-#collect octopus script		      #
 
-##############################################################################################################################################
+#######################################################################
+#								      #	
+# Call variants from BAM files mapped by Bowtie2 using  Octopus       #
+#                                                                     #
+#######################################################################
 
 PATH_IN_BAMS=/media/rna/INIA/benchmark/Alignment/Bowtie2/Alignment_BAM
 PATH_REF_FILE=/media/rna/INIA/benchmark/Alignment/Bowtie2/Reference_Bowtie2/DM_1-3_516_R44_potato_genome_assembly.v6.1.fa
@@ -14,18 +15,18 @@ PATH_STAT_OUT=/media/rna/INIA/benchmark/Variant_calling/octopus/Bowtie2/stat
 mkdir -p $PATH_STAT_OUT
 
 for folder in ${PATH_IN_BAMS}/*; do
-	sample=$(basename $folder)
-  # Specifying file name for compuation times for each chromosome
+  sample=$(basename $folder)
+  # Specifying file name for compuation times for each sample
   COMP=${PATH_STAT_OUT}/computation_times_${sample}.txt
   #realign=${PATH_VCF_OUT}/realigned_${sample}.bam
   oct_start=`date +%s`
 
    #validate and check for the read groups
   /media/rna/INIA/benchmark/Variant_calling/gatk/gatk-4.2.5.0/gatk ValidateSamFile   -I $PATH_IN_BAMS/$sample/*_sorted*.bam -R $PATH_REF_FILE MODE= SUMMARY
-    #fix the readgroup issue
+  #fix the readgroup issue
   /media/rna/INIA/benchmark/Variant_calling/gatk/gatk-4.2.5.0/gatk AddOrReplaceReadGroups -I $PATH_IN_BAMS/$sample/*_sorted*.bam -O $PATH_VCF_OUT/$sample.bam -SORT_ORDER coordinate -RGID foo -RGLB bar -RGPL illumina -RGPU barcode  -RGSM Sample1 -CREATE_INDEX True
-  #sudo docker run dancooke/octopus \
-  /home/rna/Downloads/octopus/bin/octopus --reference $PATH_REF_FILE \
+
+ /home/rna/Downloads/octopus/bin/octopus --reference $PATH_REF_FILE \
   --reads $PATH_VCF_OUT/$sample.bam \
   --organism-ploidy 4 \
   --disable-call-filtering \
